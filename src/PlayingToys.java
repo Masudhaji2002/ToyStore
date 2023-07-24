@@ -1,7 +1,9 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class PlayingToys implements getPrizeToys_I, choicePrizeToys_I, changeDrop_I, addToys_I {
+public class PlayingToys implements getPrizeToys_I, choicePrizeToys_I, changeDrop_I, addToys_I, writeToFile_I, removePrizeToys_I {
     private ArrayList<String> prizeToys;
     private Toy toy;
 
@@ -40,6 +42,19 @@ public class PlayingToys implements getPrizeToys_I, choicePrizeToys_I, changeDro
                 int randomIndex = random.nextInt(prizeToys.size());
                 String randomPrizeToy = prizeToys.get(randomIndex);
                 System.out.println("Вы получили призовую игрушку: " + randomPrizeToy);
+
+                //Записываем игрушку в текстовый файл
+                writeToFile(randomPrizeToy);
+
+                //Удаляем игрушку из списка призовых
+                removePrizeToys(randomIndex);
+
+            }
+            // Уменьшаем количество призовых игрушек после каждой выдачи
+            if (!prizeToys.isEmpty()) {
+                System.out.println("Осталось призовых игрушек: " + prizeToys.size());
+            } else {
+                System.out.println("Нет призовых игрушек в наличии.");
             }
         }
 
@@ -53,6 +68,23 @@ public class PlayingToys implements getPrizeToys_I, choicePrizeToys_I, changeDro
             for (String prizeToy : prizeToys){
                 System.out.println(prizeToy);
             }
+        }
+
+    }
+
+    @Override
+    public void removePrizeToys(int randomIndex) {
+        prizeToys.remove(randomIndex);
+    }
+
+    @Override
+    public void writeToFile(String toyName) {
+        try {
+            FileWriter writer = new FileWriter("prize_toys.txt", true); // true для добавления в конец файла
+            writer.write(toyName + "\n");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
