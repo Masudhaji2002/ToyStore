@@ -39,6 +39,12 @@ public class Main {
         playingToys.choicePrizeToys();
         playingToys.choicePrizeToys();
         playingToys.choicePrizeToys();
+        playingToys.choicePrizeToys();
+        playingToys.choicePrizeToys();
+        playingToys.choicePrizeToys();
+        playingToys.choicePrizeToys();
+        playingToys.choicePrizeToys();
+        playingToys.choicePrizeToys();
 
 
 
